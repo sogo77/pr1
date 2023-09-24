@@ -1,0 +1,28 @@
+using System;
+using System.Text.RegularExpressions;
+
+class Program
+{
+    static void Main()
+    {
+        string inputText = "Cлова які потрібно замінити в тексті: слово, слова, словом, словами";
+        string[] wordsToReplace = { "слово", "слова", "словом" };
+        string replacement = "замінено";
+
+        string filteredText = ReplaceWords(inputText, wordsToReplace, replacement);
+        Console.WriteLine(filteredText);
+
+        Console.ReadLine();
+    }
+
+    static string ReplaceWords(string inputText, string[] wordsToReplace, string replacement)
+    {
+        // Створюємо регулярний вираз для знаходження всіх форм слів у тексті
+        string pattern = @"\b(" + string.Join("|", wordsToReplace) + @")\b";
+
+        // Виконуємо заміну слів у тексті
+        string filteredText = Regex.Replace(inputText, pattern, replacement);
+
+        return filteredText;
+    }
+}
